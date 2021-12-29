@@ -17,17 +17,18 @@
 
 enum layers {
     _QWERTY = 0,
-    _SYM,
+    _SYM2,
     _NAV,
     _NUM,
     _ADJUST,
+    _SYM,
 };
 
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
 
-#define SYM      MO(_SYM)
+#define SYM      MO(_SYM2)
 #define NAV      MO(_NAV)
 #define NUM      MO(_NUM)
 #define ADJUST   MO(_ADJUST)
@@ -116,6 +117,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_QUES,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
+
+/*
+ * Sym Layer: Numbers and symbols
+ *
+ * ,-------------------------------------------.                              ,-------------------------------------------.
+ * |        |  '   |  <   |  >   |  "   |  .   |                              |   &  |  ::  |  [   |  ]   |  %   |        |
+ * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
+ * |        |  !   |  -   |  +   |  =   |  #   |                              |   |  |  :   |  (   |  )   |  ?   |        |
+ * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
+ * |        |   ^  |  /   |  *   |  \   | ../  |      |      |  |      |      |   ~  |  $   |  {   |  }   |  @   |        |
+ * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        |      |      |      |      |      |  |      |      |      |      |      |
+ *                        `----------------------------------'  `----------------------------------'
+ */
+    [_SYM2] = LAYOUT(
+    _______,  KC_GRV ,   KC_LT,  KC_GT ,   KC_DQT , KC_DOT ,                                    KC_AMPR, KC_7,    KC_LBRC, KC_RBRC ,KC_PERC, _______ ,
+    _______,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_HASH,                                   KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, _______,
+    _______, KC_CIRC, KC_SLASH, KC_ASTR, KC_BSLS, KC_LBRC, _______, _______, _______, _______,  KC_TILD, KC_DLR,  KC_LCBR, KC_RCBR, KC_AT,   _______,
+                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+
 /*
  * Num Layer: Numbers on a numpad
  *
