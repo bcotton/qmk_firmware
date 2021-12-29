@@ -23,4 +23,4 @@ void disable_caps_word(void);
 void toggle_caps_word(void);
 bool is_capsword_keypress(void);
 
-bool process_record_user_kb(uint16_t keycode, const keyrecord_t *record);
+bool process_record_keymap(uint16_t keycode, const keyrecord_t *record);

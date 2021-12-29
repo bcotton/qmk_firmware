@@ -20,7 +20,7 @@
 static bool is_caps_word_on = false;
 
 __attribute__ ((weak))
-bool process_record_user_kb(uint16_t keycode, const keyrecord_t *record) {
+bool process_record_keymap(uint16_t keycode, const keyrecord_t *record) {
     return true;
 }
 
@@ -111,5 +111,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         disable_caps_word();
     }
 
-    return process_record_user_kb(keycode, record);
+    return process_record_keymap(keycode, record);
 }

@@ -38,6 +38,11 @@ enum layers {
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
+enum custom_keycodes {
+    UPDIR = SAFE_RANGE, 
+    DOUBLE_COLON,
+};
+
 // Tap Dance declarations
 enum {
     DANCE_0,
@@ -133,9 +138,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_SYM2] = LAYOUT(
-    _______,  KC_GRV ,   KC_LT,  KC_GT ,   KC_DQT , KC_DOT ,                                    KC_AMPR, KC_7,    KC_LBRC, KC_RBRC ,KC_PERC, _______ ,
-    _______,  KC_EXLM,  KC_MINUS, KC_PLUS,  KC_EQUAL, KC_HASH,                                   KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, _______,
-    _______, KC_CIRC, KC_SLASH, KC_ASTR, KC_BSLS, KC_LBRC, _______, _______, _______, _______,  KC_TILD, KC_DLR,  KC_LCBR, KC_RCBR, KC_AT,   _______,
+    _______,  KC_GRV,  KC_LT,    KC_GT,   KC_DQT,   KC_DOT ,                                    KC_AMPR, DOUBLE_COLON,    KC_LBRC, KC_RBRC ,KC_PERC, _______ ,
+    _______,  KC_EXLM, KC_MINUS, KC_PLUS, KC_EQUAL, KC_HASH,                                   KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, _______,
+    _______, KC_CIRC,  KC_SLASH, KC_ASTR, KC_BSLS,  UPDIR, _______, _______, _______, _______,  KC_TILD, KC_DLR,  KC_LCBR, KC_RCBR, KC_AT,   _______,
                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     ),
 
@@ -224,14 +229,32 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            tap_code(KC_MS_WH_DOWN);
+            register_code16(KC_MS_WH_DOWN);
         } else {
-            tap_code(KC_MS_WH_UP);
+            register_code16(KC_MS_WH_UP);
         }
     }
     return false;
 }
 #endif
+
+
+bool process_record_keymap(uint16_t keycode, const keyrecord_t *record) {
+    switch (keycode) {
+        case UPDIR: 
+          if (record->event.pressed) {
+              SEND_STRING("../");
+          }
+        break;
+
+        case DOUBLE_COLON: 
+          if (record->event.pressed) {
+              SEND_STRING("::");
+          }
+        break;
+    }
+    return true;
+}
 
 typedef struct {
     bool is_press_action;
