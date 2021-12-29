@@ -239,7 +239,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 
 
-bool process_record_keymap(uint16_t keycode, const keyrecord_t *record) {
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case UPDIR: 
           if (record->event.pressed) {
