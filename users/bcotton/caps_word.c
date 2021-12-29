@@ -19,11 +19,6 @@
 
 static bool is_caps_word_on = false;
 
-__attribute__ ((weak))
-bool process_record_keymap(uint16_t keycode, const keyrecord_t *record) {
-    return true;
-}
-
 bool is_caps_word_enabled(void) {
     return is_caps_word_on;
 }
@@ -75,7 +70,7 @@ bool is_capsword_keypress(void) {
 }
 
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_caps_word(uint16_t keycode, keyrecord_t *record) {
     // If the behavior isn't enabled and the keypress isn't a keycode to
     // toggle the behavior, allow QMK to handle the keypress as usual
     if (!is_caps_word_enabled()) {
@@ -111,5 +106,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         disable_caps_word();
     }
 
-    return process_record_keymap(keycode, record);
+    return true;
 }
