@@ -72,11 +72,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      | Enter|      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_QWERTY] = LAYOUT(
-     KC_TAB  , KC_Q ,             KC_W   ,           KC_E  ,            KC_R ,             KC_T ,                                                 KC_Y,   KC_U ,             KC_I ,             KC_O ,             KC_P ,                  KC_BSPC,
-     TD(DANCE_0) , MT(MOD_LCTL, KC_A),MT(MOD_LALT, KC_S),MT(MOD_LGUI, KC_D),MT(MOD_LSFT, KC_F),KC_G,                                              KC_H,   MT(MOD_RSFT, KC_J),MT(MOD_RGUI, KC_K),MT(MOD_RALT, KC_L),MT(MOD_RCTL, KC_SCOLON),KC_QUOT,
-     KC_LSFT , KC_Z ,             KC_X   ,           KC_C  ,            KC_V ,             KC_B , KC_LBRC,KC_CAPS,    _______ , KC_RBRC,          KC_N,   KC_M ,             TD(DANCE_1),       TD(DANCE_2),       TD(DANCE_3),            KC_RSFT,
-                                _______ , KC_LGUI, NAV, KC_SPC , _______   ,                                          _______ , KC_BSPC , SYM, KC_RGUI, _______
+    [_QWERTY] = LAYOUT_stack(
+     KC_TAB,      KC_Q ,       KC_W,        KC_E,        KC_R,        KC_T ,
+     TD(DANCE_0), LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),LSFT_T(KC_F),KC_G,
+     KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , KC_LBRC,KC_CAPS,    
+                                _______ , ADJUST, NAV, KC_SPC , _______   , 
+
+
+                                                     KC_Y,   KC_U ,       KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
+                                                     KC_H,   RSFT_T(KC_J),RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,                                                     
+                         _______ , _______,          KC_N,   KC_M ,       KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
+                         _______ , KC_BSPC , SYM, KC_RGUI, _______                         
     ),
 
 
@@ -254,6 +260,29 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
         break;
     }
     return true;
+}
+
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+#ifdef RGBLIGHT_ENABLE  // include mods, as well as layers    
+    switch (get_highest_layer(state)) {
+        case _QWERTY:
+            rgblight_setrgb (0x00,  0x00, 0x00);
+            break;
+        case _NAV:
+            rgblight_setrgb(0xFF, 0x00, 0x00);
+            break;
+        case _NUM:
+            rgblight_setrgb(0x00, 0xFF, 0x00);
+            break;
+        case _SYM2:
+            rgblight_setrgb(0x00, 0x00, 0xFF);
+            break;
+        default:
+            rgblight_setrgb (0x00,  0x00, 0x00);
+    }
+#endif    
+    return update_tri_layer_state(state, _NAV, _SYM2, _NUM);
 }
 
 typedef struct {
