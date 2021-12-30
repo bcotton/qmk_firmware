@@ -4,4 +4,5 @@ COMB(paste, LCMD(KC_V), KC_C, KC_V)
 COMB(paste_m, S(LCMD(KC_V)), KC_X, KC_V)
 COMB(select_all, LCMD(KC_A), KC_Z, KC_V)
 COMB(undo, LCMD(KC_Z), KC_Z, KC_X)
-
+COMB(dash,KC_MINUS, KC_M, KC_COMMA)
+COMB(unds, KC_UNDS, KC_COMMA, KC_DOT)
