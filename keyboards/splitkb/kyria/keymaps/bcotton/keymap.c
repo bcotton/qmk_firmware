@@ -17,18 +17,17 @@
 
 enum layers {
     _QWERTY = 0,
-    _SYM2,
+    _SYM,
     _NAV,
     _NUM,
     _ADJUST,
-    _SYM,
 };
 
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
 
-#define SYM      MO(_SYM2)
+#define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
 #define NUM      MO(_NUM)
 #define ADJUST   MO(_ADJUST)
@@ -39,7 +38,7 @@ enum layers {
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
 enum custom_keycodes {
-    UPDIR = SAFE_RANGE, 
+    UPDIR = SAFE_RANGE,
     DOUBLE_COLON,
 };
 
@@ -75,14 +74,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_stack(
      KC_TAB,      KC_Q ,       KC_W,        KC_E,        KC_R,        KC_T ,
      TD(DANCE_0), LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),LSFT_T(KC_F),KC_G,
-     KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , KC_LBRC,KC_CAPS,    
-                                _______ , ADJUST, NAV, KC_SPC , _______   , 
+     KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , KC_LBRC,KC_CAPS,
+                                _______ , ADJUST, NAV, KC_SPC , _______   ,
 
 
                                                      KC_Y,   KC_U ,       KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
-                                                     KC_H,   RSFT_T(KC_J),RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,                                                     
+                                                     KC_H,   RSFT_T(KC_J),RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,
                          _______ , _______,          KC_N,   KC_M ,       KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
-                         _______ , KC_BSPC , SYM, KC_RGUI, _______                         
+                         _______ , KC_BSPC , SYM, KC_RGUI, _______
     ),
 
 
@@ -108,26 +107,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______
     ),
 
-/*
- * Sym Layer: Numbers and symbols
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |    `   |  1   |  2   |  3   |  4   |  5   |                              |   6  |  7   |  8   |  9   |  0   |   =    |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |    ~   |  !   |  @   |  #   |  $   |  %   |                              |   ^  |  &   |  *   |  (   |  )   |   +    |
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |    |   |   \  |  :   |  ;   |  -   |  [   |  {   |      |  |      |   }  |   ]  |  _   |  ,   |  .   |  /   |   ?    |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_SYM] = LAYOUT(
-      KC_GRV ,   KC_1 ,   KC_2 ,   KC_3 ,   KC_4 ,   KC_5 ,                                       KC_6 ,   KC_7 ,   KC_8 ,   KC_9 ,   KC_0 , KC_EQL ,
-     KC_TILD , KC_EXLM,  KC_AT , KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PLUS,
-     KC_PIPE , KC_BSLS, KC_COLN, KC_SCLN, KC_MINS, KC_LBRC, KC_LCBR, _______, _______, KC_RCBR, KC_RBRC, KC_UNDS, KC_COMM,  KC_DOT, KC_SLSH, KC_QUES,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-    ),
 
 /*
  * Sym Layer: Numbers and symbols
@@ -143,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_SYM2] = LAYOUT(
+    [_SYM] = LAYOUT(
     _______,  KC_GRV,  KC_LT,    KC_GT,   KC_DQT,   KC_DOT ,                                    KC_AMPR, DOUBLE_COLON,    KC_LBRC, KC_RBRC ,KC_PERC, _______ ,
     _______,  KC_EXLM, KC_MINUS, KC_PLUS, KC_EQUAL, KC_HASH,                                   KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, _______,
     _______, KC_CIRC,  KC_SLASH, KC_ASTR, KC_BSLS,  UPDIR, _______, _______, _______, _______,  KC_TILD, KC_DLR,  KC_LCBR, KC_RCBR, KC_AT,   _______,
@@ -221,7 +200,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * DO NOT edit the rev1.c file; instead override the weakly defined default functions by your own.
  */
 
-
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
 
@@ -235,9 +213,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            register_code16(KC_MS_WH_DOWN);
+            tap_code(KC_MS_WH_DOWN);
+            tap_code(KC_MS_WH_DOWN);
         } else {
-            register_code16(KC_MS_WH_UP);
+            tap_code(KC_MS_WH_UP);
+            tap_code(KC_MS_WH_UP);
         }
     }
     return false;
@@ -247,13 +227,13 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case UPDIR: 
+        case UPDIR:
           if (record->event.pressed) {
               SEND_STRING("../");
           }
         break;
 
-        case DOUBLE_COLON: 
+        case DOUBLE_COLON:
           if (record->event.pressed) {
               SEND_STRING("::");
           }
@@ -264,25 +244,25 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
 
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-#ifdef RGBLIGHT_ENABLE  // include mods, as well as layers    
+#ifdef RGBLIGHT_ENABLE
     switch (get_highest_layer(state)) {
         case _QWERTY:
-            rgblight_setrgb (0x00,  0x00, 0x00);
+            rgblight_setrgb (0x20,  0x20, 0x20);
             break;
         case _NAV:
-            rgblight_setrgb(0xFF, 0x00, 0x00);
+            rgblight_setrgb(0xFF, 0xFF, 0x00);
             break;
         case _NUM:
             rgblight_setrgb(0x00, 0xFF, 0x00);
             break;
-        case _SYM2:
+        case _SYM:
             rgblight_setrgb(0x00, 0x00, 0xFF);
             break;
         default:
-            rgblight_setrgb (0x00,  0x00, 0x00);
+            rgblight_setrgb (0x20,  0x20, 0x20);
     }
-#endif    
-    return update_tri_layer_state(state, _NAV, _SYM2, _NUM);
+#endif
+    return update_tri_layer_state(state, _NAV, _SYM, _NUM);
 }
 
 typedef struct {
