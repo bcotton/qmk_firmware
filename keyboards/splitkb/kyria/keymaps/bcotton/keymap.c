@@ -73,14 +73,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT_stack(
      KC_TAB,      KC_Q ,       KC_W,        KC_E,        KC_R,        KC_T ,
-     TD(DANCE_0), LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),LSFT_T(KC_F),KC_G,
+     TD(DANCE_0), LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),KC_F,        LSFT_T(KC_G),
      KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , KC_LBRC,KC_CAPS,
                                 _______ , ADJUST, NAV, KC_SPC , _______   ,
 
-
-                                                     KC_Y,   KC_U ,       KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
-                                                     KC_H,   RSFT_T(KC_J),RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,
-                         _______ , _______,          KC_N,   KC_M ,       KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
+                                                     KC_Y,   KC_U , KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
+                                                     RSFT_T(KC_H),  KC_J,        RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,
+                         _______ , _______,          KC_N,   KC_M,  KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
                          _______ , KC_BSPC , SYM, KC_RGUI, _______
     ),
 
@@ -100,11 +99,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_NAV] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     LGUI(KC_LEFT),  LALT(LGUI(KC_LEFT)),LALT(LGUI(KC_RIGHT)),RGUI(KC_RIGHT),  KC_VOLD, KC_VOLU,
-      _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                                     KC_LEFT,        KC_DOWN,            KC_UP,               KC_RGHT,         KC_ENTER, KC_INS,
-      _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,_______,        _______,            _______,             _______,         _______,  _______,
-                                 _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______
+    [_NAV] = LAYOUT_stack(
+      _______, _______, _______, _______, _______, _______,
+      _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,
+      _______, _______, _______, _______, _______, _______, _______,_______,
+                                 _______, _______, _______, _______, _______,
+
+
+                                                        LGUI(KC_LEFT),  LALT(LGUI(KC_LEFT)),LALT(LGUI(KC_RIGHT)),RGUI(KC_RIGHT),  KC_VOLD, KC_VOLU,
+                                                        KC_LEFT,        KC_DOWN,            KC_UP,               KC_RGHT,         KC_ENTER, KC_INS,
+                                    _______, _______, _______,        _______,            _______,             _______,         _______,  _______,
+                                    _______, _______, _______, _______, _______
     ),
 
 
@@ -122,11 +127,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_SYM] = LAYOUT(
-    _______,  KC_GRV,  KC_LT,    KC_GT,   KC_DQT,   KC_DOT ,                                    KC_AMPR, DOUBLE_COLON,    KC_LBRC, KC_RBRC ,KC_PERC, _______ ,
-    _______,  KC_EXLM, KC_MINUS, KC_PLUS, KC_EQUAL, KC_HASH,                                   KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_QUES, _______,
-    _______, KC_CIRC,  KC_SLASH, KC_ASTR, KC_BSLS,  UPDIR, _______, _______, _______, _______,  KC_TILD, KC_DLR,  KC_LCBR, KC_RCBR, KC_AT,   _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    [_SYM] = LAYOUT_stack(
+    _______,  KC_GRV,  KC_LT,    KC_GT,   KC_DQT,   KC_DOT ,
+    _______,  KC_EXLM, KC_MINUS, KC_PLUS, KC_EQUAL, KC_HASH,
+    _______, KC_CIRC,  KC_SLASH, KC_ASTR, KC_BSLS,  UPDIR, _______, _______,
+                       _______, _______, _______, _______, _______,
+
+                                                            KC_AMPR, DOUBLE_COLON,    KC_LBRC, KC_RBRC ,KC_PERC, _______,
+                                                            KC_PIPE, KC_COLN,         KC_LPRN, KC_RPRN, KC_QUES, _______,
+                                        _______, _______,  KC_TILD, KC_DLR,          KC_LCBR, KC_RCBR, KC_AT,   _______,
+                                        _______, _______, _______, _______, _______
+
     ),
 
 /*
@@ -143,11 +154,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_NUM] = LAYOUT(
-      _______, _______, _______, _______, _______, _______,                                     _______ ,KC_7 ,KC_8, KC_9, _______, _______,
-     _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,                                     _______, KC_4, KC_5, KC_6, KC_ENTER, _______,
-     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_0,    KC_1, KC_2, KC_3, KC_DOT, _______,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    [_NUM] = LAYOUT_stack(
+      _______, _______, _______, _______, _______, _______,
+     _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,
+     _______, _______, _______, _______, _______, _______, _______,
+                                 _______, _______, _______, _______, _______,
+
+                                     _______ ,KC_7 ,KC_8, KC_9, _______, _______,
+                                     _______, KC_4, KC_5, KC_6, KC_ENTER, _______,
+           _______, _______, _______, KC_0,   KC_1, KC_2, KC_3, KC_DOT, _______,
+          _______, _______, _______, _______, _______
     ),
 
 
@@ -165,40 +181,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
-    [_ADJUST] = LAYOUT(
-      _______, _______, _______, QWERTY , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
-      _______, _______, _______, _______ , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
-      _______, _______, _______, _______, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
-                                 _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
+    [_ADJUST] = LAYOUT_stack(
+      _______, _______, _______, QWERTY , _______, _______,
+      _______, _______, _______, _______ , _______, _______,
+      _______, _______, _______, _______, _______, _______,_______,
+                                 _______, _______, _______,_______, _______,
+
+                                                                    _______, _______, _______, _______,  _______, _______,
+                                                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
+                                _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
+                                _______, _______, _______, _______, _______
     ),
 
-// /*
-//  * Layer template
-//  *
-//  * ,-------------------------------------------.                              ,-------------------------------------------.
-//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
-//  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
-//  * |        |      |      |      |      |      |                              |      |      |      |      |      |        |
-//  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
-//  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
-//  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
-//  *                        |      |      |      |      |      |  |      |      |      |      |      |
-//  *                        |      |      |      |      |      |  |      |      |      |      |      |
-//  *                        `----------------------------------'  `----------------------------------'
-//  */
-//     [_LAYERINDEX] = LAYOUT(
-//       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-//       _______, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-//       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-//                                  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
-//     ),
 };
-
-/* The default OLED and rotary encoder code can be found at the bottom of qmk_firmware/keyboards/splitkb/kyria/rev1/rev1.c
- * These default settings can be overriden by your own settings in your keymap.c
- * For your convenience, here's a copy of those settings so that you can uncomment them if you wish to apply your own modifications.
- * DO NOT edit the rev1.c file; instead override the weakly defined default functions by your own.
- */
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
