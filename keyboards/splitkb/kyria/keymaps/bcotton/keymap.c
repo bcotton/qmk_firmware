@@ -33,9 +33,12 @@ enum layers {
 #define ADJUST   MO(_ADJUST)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
-#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
-#define ALT_ENT  MT(MOD_LALT, KC_ENT)
+
+#define B_BACK    LGUI(KC_LEFT)
+#define B_FORWARD RGUI(KC_RIGHT)
+#define TAB_LEFT  LALT(LGUI(KC_LEFT))
+#define TAB_RIGHT LALT(LGUI(KC_RIGHT))
+#define S_GUI_A   LSFT(LGUI(KC_A))
 
 enum custom_keycodes {
     UPDIR = SAFE_RANGE,
@@ -63,24 +66,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |Ctrl/' "|
+ * |Ctrl/Esc|   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |     ' "|
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   C  |   V  |   B  | [ {  |CapsLk|  |F-keys|  ] } |   N  |   M  | ,  < | . >  | /  ? | RShift |
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |      |  |      |      |   N  |   M  | ,  < | . >  | /  ? | RShift |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |Adjust| LGUI | LAlt/| Space| Nav  |  | Sym  | Space| AltGr| RGUI | Menu |
- *                        |      |      | Enter|      |      |  |      |      |      |      |      |
+ *                        |      |Adjust| Nav  | Space|      |  |      | Bksp | Sym  |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT_stack(
      KC_TAB,      KC_Q ,       KC_W,        KC_E,        KC_R,        KC_T ,
-     TD(DANCE_0), LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),KC_F,        LSFT_T(KC_G),
-     KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , KC_LBRC,KC_CAPS,
-                                _______ , ADJUST, NAV, KC_SPC , _______   ,
+     CTL_ESC,     LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),KC_F,        LSFT_T(KC_G),
+     KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , ADJUST,_______,
+                               S_GUI_A,  NUM, NAV, KC_SPC , _______   ,
 
                                                      KC_Y,   KC_U , KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
                                                      RSFT_T(KC_H),  KC_J,        RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,
                          _______ , _______,          KC_N,   KC_M,  KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
-                         _______ , KC_BSPC , SYM, KC_RGUI, _______
+                         OSM(MOD_LSFT | MOD_LALT | MOD_LGUI ) , KC_BSPC , SYM, OSM(MOD_LSFT), _______
     ),
 
 
@@ -89,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Nav Layer: Media, navigation
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              | PgUp | Home |   ↑  | End  | VolUp| Delete |
+ * |        |      |      |      |      |      |                              |Back  |T/left|T/right| Fwd | VolDn| VolUp  |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  GUI |  Alt | Ctrl | Shift|      |                              | PgDn |  ←   |   ↓  |   →  | VolDn| Insert |
+ * |        |  GUI |  Alt | Ctrl | Shift|      |                              |  ←   |   ↓  |  ↑   |   →  | Enter| Insert |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
@@ -106,10 +108,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, _______, _______, _______, _______,
 
 
-                                                        LGUI(KC_LEFT),  LALT(LGUI(KC_LEFT)),LALT(LGUI(KC_RIGHT)),RGUI(KC_RIGHT),  KC_VOLD, KC_VOLU,
-                                                        KC_LEFT,        KC_DOWN,            KC_UP,               KC_RGHT,         KC_ENTER, KC_INS,
-                                    _______, _______, _______,        _______,            _______,             _______,         _______,  _______,
-                                    _______, _______, _______, _______, _______
+                                                        B_BACK, TAB_LEFT, TAB_RIGHT, B_FORWARD,  KC_VOLD, KC_VOLU,
+                                                        KC_LEFT,KC_DOWN,  KC_UP,     KC_RGHT,    KC_ENTER, KC_INS,
+                                      _______, _______, _______, _______,  _______, _______,  _______,  _______,
+                                      _______, _______, _______, _______, _______
     ),
 
 
@@ -144,26 +146,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Num Layer: Numbers on a numpad
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |      |      |      |                              |      |  7   |  8   |  9   |      |        |
+ * |        |      |   (  |  )   |      |  .   |                              |      |  7   |  8   |  9   |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |  GUI |  Alt | Ctrl | Shift|      |                              |      |  4   |  5   |  6   | Ret  |        |
+ * |        |      |   -  |  +   |   =  |      |                              |   .  |  4   |  5   |  6   | Ret  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |      |  |      |      |   0  |  1   |  2   |  3   |  .   |        |
+ * |        |      |   /  |  *   |      |      |      |      |  |      |      |   0  |  1   |  2   |  3   |  .   |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_NUM] = LAYOUT_stack(
-      _______, _______, _______, _______, _______, _______,
-     _______, KC_LCTL, KC_LALT, KC_LGUI, KC_LSFT, _______,
-     _______, _______, _______, _______, _______, _______, _______,
+      _______, _______, KC_LPRN, KC_RPRN, _______, KC_DOT,
+     _______, _______, KC_MINUS, KC_PLUS, KC_EQUAL, _______,
+     _______, _______, KC_SLASH, KC_ASTR, _______, _______, _______, _______,
                                  _______, _______, _______, _______, _______,
 
-                                     _______ ,KC_7 ,KC_8, KC_9, _______, _______,
-                                     _______, KC_4, KC_5, KC_6, KC_ENTER, _______,
-           _______, _______, _______, KC_0,   KC_1, KC_2, KC_3, KC_DOT, _______,
-          _______, _______, _______, _______, _______
+                                                                    _______, KC_7, KC_8, KC_9, _______, _______,
+                                                                    KC_DOT,  KC_4, KC_5, KC_6, KC_ENTER, _______,
+                                                  _______, _______, KC_0,    KC_1, KC_2, KC_3, KC_DOT,   _______,
+                                                  _______, _______, _______, _______, _______
     ),
 
 
@@ -173,9 +175,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-------------------------------------------.                              ,-------------------------------------------.
  * |        |      |      |QWERTY|      |      |                              |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |Dvorak|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
+ * |        |      |      |      |      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
+ * |        |      |      |      |      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
  *                        |      |      |      |      |      |  |      |      |      |      |      |
  *                        |      |      |      |      |      |  |      |      |      |      |      |
@@ -184,13 +186,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT_stack(
       _______, _______, _______, QWERTY , _______, _______,
       _______, _______, _______, _______ , _______, _______,
-      _______, _______, _______, _______, _______, _______,_______,
+      _______, _______, _______, _______, _______, _______,_______,_______,
                                  _______, _______, _______,_______, _______,
 
-                                                                    _______, _______, _______, _______,  _______, _______,
-                                                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
-                                _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
-                                _______, _______, _______, _______, _______
+                                                                     _______, _______, _______,  _______, _______,_______,
+                                                                     RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
+                                                   _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
+                                                   _______, _______, _______, _______, _______
     ),
 
 };
@@ -257,7 +259,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             rgblight_setrgb (0x20,  0x20, 0x20);
     }
 #endif
-    return update_tri_layer_state(state, _NAV, _SYM, _NUM);
+    // return update_tri_layer_state(state, _NAV, _SYM, _NUM);
+    return state;
 }
 
 typedef struct {
