@@ -6,6 +6,5 @@ COMB(select_all, LCMD(KC_A), KC_Z, KC_V)
 COMB(undo, LCMD(KC_Z), KC_Z, KC_X)
 COMB(dash,KC_MINUS, KC_M, KC_COMMA)
 COMB(unds, KC_UNDS, KC_COMMA, KC_DOT)
-COMB(osmshift, OSM(MOD_LSFT), KC_W, KC_E)
 COMB(osshift2, OSM(MOD_LSFT), KC_F, KC_J)
 
