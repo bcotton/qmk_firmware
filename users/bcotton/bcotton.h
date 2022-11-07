@@ -1,5 +1,5 @@
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
-#define HYPER OSM(MOD_LSFT | MOD_LALT | MOD_LGUI )
+#define HYPER OSM(MOD_LSFT | MOD_LALT | MOD_LGUI | MOD_LCTL )
 enum layers {
     _QWERTY = 0,
     _SYM,

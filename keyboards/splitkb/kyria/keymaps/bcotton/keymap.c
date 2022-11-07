@@ -43,12 +43,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB,      KC_Q ,       KC_W,        KC_E,        KC_R,        KC_T ,
      CTL_ESC,     LCTL_T(KC_A),LALT_T(KC_S),LGUI_T(KC_D),KC_F,        LSFT_T(KC_G),
      KC_LSFT,     KC_Z,        KC_X,        KC_C,        KC_V ,       KC_B , ADJUST,_______,
-                               S_GUI_A,  NUM, NAV, MT(HYPER,KC_SPC) , _______   ,
+                               S_GUI_A,  NUM, NAV, HYPR_T(KC_SPC) , _______   ,
 
                                                      KC_Y,   KC_U , KC_I ,       KC_O ,       KC_P ,            KC_BSPC,
                                                      RSFT_T(KC_H),  KC_J,        RGUI_T(KC_K),RALT_T(KC_L),RCTL_T(KC_SCOLON),KC_QUOT,
                          _______ , _______,          KC_N,   KC_M,  KC_COMMA,    KC_DOT,      TD(DANCE_3),      KC_RSFT,
-                         HYPER , KC_BSPC , SYM, HYPER, _______
+                         KC_HYPR , KC_BSPC , SYM, KC_HYPR, _______
     ),
 
 
